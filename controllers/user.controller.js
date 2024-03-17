@@ -49,6 +49,8 @@ export const loginUser = async (req, res) => {
 
     const { password, ...userInfo } = user._doc;
 
+    userInfo.token = token
+
     return res
       .cookie("accessToken", token, {
         httpOnly: true,
