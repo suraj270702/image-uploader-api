@@ -1,9 +1,13 @@
-export const imageUpload =(req,res)=>{
+import ImageUpload from "../models/Image-Upload.js"
+
+export const imageUpload =async(req,res)=>{
     try{
 
-        console.log("User Id",req.userId)
+        const newData = new ImageUpload({name:req.body.name,image:req.body.url,userId:req.userId})
 
-        return res.status(200).json({message:"success"})
+        await newData.save()
+
+        return res.status(200).json({message:"image uploaded successfully"})
 
     }
     catch(err){
