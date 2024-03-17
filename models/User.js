@@ -1,6 +1,10 @@
 import mongoose,{Schema} from "mongoose";
 
 const userSchema = new Schema({
+    name:{
+        type:String,
+        required:true
+    },
     email:{
         type:String,
         required:true,
@@ -11,6 +15,12 @@ const userSchema = new Schema({
         required:true,
         minLength:5
         
+    },
+    role:{
+        type:String,
+        required:true,
+        default:"user",
+        enum:["user","admin"]
     }
 },{timestamps:true})
 

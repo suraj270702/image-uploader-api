@@ -3,6 +3,8 @@ import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import userRoute from './routes/user.route.js'
+import uploadRoute from './routes/upload.route.js'
 
 const app = express()
 dotenv.config()
@@ -21,10 +23,14 @@ const db = async()=>{
       }
 }
 
-
+//middleware
 app.use(cookieParser())
 app.use(express.json())
 app.use(cors({credentials:true}))
+
+
+app.use("/api",userRoute)
+app.use("/api/image-upload",uploadRoute)
 
 
 app.listen(3001,()=>{
