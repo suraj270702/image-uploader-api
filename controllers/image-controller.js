@@ -18,7 +18,15 @@ export const imageUpload = async (req, res) => {
 
 export const getAllImages = async (req, res) => {
   try {
-    const getAllImages = await ImageUpload.find({ userId: req.userId })
+    const searchKeyword = req.query.search
+      ? {
+          name: {
+            $regex: req.query.search.replace(/["']/g, ""),
+            $options: "i",
+          },
+        }
+      : {};
+    const getAllImages = await ImageUpload.find({...searchKeyword, userId: req.userId })
 
     return res.status(200).json({ message: "success", getAllImages });
   } catch (err) {
