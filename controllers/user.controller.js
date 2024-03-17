@@ -52,9 +52,9 @@ export const loginUser = async (req, res) => {
     return res
       .cookie("accessToken", token, {
         httpOnly: true,
-        expires: new Date(
-          Date.now() + 7 * 24 * 60 * 60 * 1000
-        ),
+        expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+        sameSite: "None", // Set SameSite attribute to None
+        secure: true,
       })
       .status(200)
       .send(userInfo);
