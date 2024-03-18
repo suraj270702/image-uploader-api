@@ -64,3 +64,7 @@ export const loginUser = async (req, res) => {
     console.log(err);
   }
 };
+
+export const logoutUser = async (req, res) => {
+  res.clearCookie('accessToken',{sameSite : "none",secure:true}).status(200).send("Logged out successfully");
+};
