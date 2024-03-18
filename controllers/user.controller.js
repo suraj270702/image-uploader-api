@@ -49,13 +49,14 @@ export const loginUser = async (req, res) => {
 
     const { password, ...userInfo } = user._doc;
 
-    userInfo.token = token
+    userInfo.token = token;
 
     return res
       .cookie("accessToken", token, {
         httpOnly: true,
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-        
+        sameSite: "None",
+        secure: true, // Ensures cookie is only sent over HTTPS
       })
       .status(200)
       .send(userInfo);
